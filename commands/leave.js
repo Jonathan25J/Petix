@@ -11,16 +11,15 @@ module.exports.run = async (bot, message, args, ops) => {
 
     if (message.guild.me.voice.channelID != message.member.voice.channelID) return message.channel.send("You are not in the same voice channel");
 
-
     var leaveEmbed = new discord.MessageEmbed()
-        .setDescription(`Left the voice channel`)
+        .setDescription(`Left ${message.guild.me.voice.channel}`)
         .setColor(message.guild.me.displayHexColor)
 
     message.channel.send(leaveEmbed);
 
-    ops.active.delete(message.guild.id);
-    
     message.guild.me.voice.channel.leave();
+
+    ops.active.delete(message.guild.id);
 
 }
 

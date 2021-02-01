@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
       //  .addField("Commands:", "```.serverinfo\n.kick (player) (reason)\n.ban (player) (reason)\n.avatar (player)\n.clear (message amount)\n.warn (player)\n.infractions (player) (set) (amount)\n.emb (title/message/channel/#color)\n.config```")
         .addFields(
             { name: "General", value: "```.serverinfo\n.kick (player) (reason)\n.ban (player) (reason)\n.avatar (player)\n.clear (message amount)\n.warn (player)\n.infractions (player) (set) (amount)\n.emb (title/message/channel/#color)\n.config```\n \n \n "},
-            { name: "Music", value: "```.serverinfo\n.play (url)\n.search (title)\n.playlist (playlist url)\n.loop (true/false)\n.queue\n.shuffle\n.pause\n.resume\n.skip\n.leave```"},
+            { name: "Music", value: "```.serverinfo\n.play (url)\n.search (title)\n.playlist (playlist url)\n.loop (true/false)\n.queue (clear/loop)\n.shuffle\n.pause\n.resume\n.skip\n.join\n.leave```"},
             { name: "Config", value: "```.config welcome (set/remove) (channel/message) (message) \n.config tickets (set/remove) category```"},
         )
         
