@@ -68,7 +68,10 @@ client.on("guildMemberAdd", member => {
 
     const channelC = JSON.parse(fs.readFileSync("./database/channels.json", "utf8"));
     const guildID = member.guild.id;
-    var message = channelC[guildID].welcome.message;  
+
+    if (!channelC[guildID].welcome) return;
+    var message = channelC[guildID].welcome.message;
+
     if (!message) return;
     var cSelected = channelC[guildID].welcome.channel;             
     var channel = member.guild.channels.cache.find(channel => channel.name === cSelected);

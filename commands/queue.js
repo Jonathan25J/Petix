@@ -19,12 +19,15 @@ module.exports.run = async (bot, message, args, ops) => {
 
 
         if (queue.length > 1) {
-            for (var i = 1; i < queue.length; i++) {
+            for (var i = 1; i <= 25; i++) {
 
                 response += `${i}) ${queue[i].songTitle} [${queue[i].requester.username}]\n`;
 
             }
         };
+
+        if (queue.length == 26) response += `**(${queue.length - 25} song remaining)**`
+        if (queue.length >= 27) response += `**(${queue.length - 25} songs remaining)**`
 
         var queueEmbed = new discord.MessageEmbed()
             .setColor(message.guild.me.displayHexColor)
