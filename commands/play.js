@@ -7,6 +7,15 @@ module.exports.run = async (client, message, args, ops, playlist) => {
 
     if (!message.member.voice.channel) return message.channel.send("You are not in a voice channel");
 
+    var notISVE = new discord.MessageEmbed()
+        .setDescription(`❌ You need to be in the same voice channel as the bot`)
+        .setColor(message.guild.me.displayHexColor);
+    var notISV = false;
+    if (message.guild.me.voice.channel) {
+        if (message.member.voice.channel !== message.guild.me.voice.channel) notISV = true;
+    }
+    if (notISV === true) return message.channel.send(notISVE);
+
     if (!args[0]) return message.channel.send("You didn't gave an url");
 
     var validate = await ytdl.validateURL(args[0]);
@@ -22,7 +31,7 @@ module.exports.run = async (client, message, args, ops, playlist) => {
     if (!data.connection) data.connection = await message.member.voice.channel.join().catch(err => {
 
         return message.channel.send("The bot can't join the channel");
-     
+
     });
 
     if (!message.guild.me.voice.channel) return;

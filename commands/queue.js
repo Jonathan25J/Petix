@@ -4,30 +4,45 @@ var prefix = config.prefix;
 
 module.exports.run = async (bot, message, args, ops) => {
 
+    var notISVE = new discord.MessageEmbed()
+        .setDescription(`❌ You need to be in the same voice channel as the bot`)
+        .setColor(message.guild.me.displayHexColor);
+    var notISV = false;
+    if (message.guild.me.voice.channel) {
+        if (message.member.voice.channel !== message.guild.me.voice.channel) notISV = true;
+    }
+    if (notISV === true) return message.channel.send(notISVE);
+
     var guildIDData = ops.active.get(message.guild.id);
 
     if (!guildIDData) return message.channel.send("There is no music playing at the moment");
 
     var queue = guildIDData.queue;
     var cPlaying = queue[0];
+    var amount;
+    if (queue.length >= 11) amount = 11;
+    if (queue.length < 11) {
 
-
+        amount = 11 - queue.length;
+        amount = 11 - amount;
+    }
 
     if (!args[0]) {
 
         var response = `Now playing **${cPlaying.songTitle}** [${cPlaying.requester}]\n\nNext: \n`;
 
 
-        if (queue.length > 1) {
-            for (var i = 1; i <= 25; i++) {
+        if (queue.length > 0) {
+
+            for (var i = 1; i < amount; i++) {
 
                 response += `${i}) ${queue[i].songTitle} [${queue[i].requester.username}]\n`;
 
             }
         };
 
-        if (queue.length == 26) response += `**(${queue.length - 25} song remaining)**`
-        if (queue.length >= 27) response += `**(${queue.length - 25} songs remaining)**`
+        if (queue.length == 12) response += `\n**(${queue.length - 11} song remaining)**`
+        if (queue.length >= 13) response += `\n**(${queue.length - 11} songs remaining)**`
 
         var queueEmbed = new discord.MessageEmbed()
             .setColor(message.guild.me.displayHexColor)

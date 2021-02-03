@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args, ops) => {
 
     if (!message.member.voice.channel) return message.channel.send("You are not in a voice channel");
 
-    if (message.guild.me.voice.channel) return;
+    if (message.guild.me.voice.channel) return message.channel.send("Bot is already in a voice channel");
 
     message.member.voice.channel.join().then(connection => {
         connection.voice.setDeaf(true).catch(err => console.error(err));

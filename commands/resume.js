@@ -1,20 +1,25 @@
 const discord = require("discord.js");
 const config = require("../config.json");
 var prefix = config.prefix;
-const ytdl = require("ytdl-core");
 
 module.exports.run = async (bot, message, args, ops) => {
-
 
     var guildIDData = ops.active.get(message.guild.id);
 
     if (!guildIDData) return message.channel.send("There is no music currently playing");
 
-    if (message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send("You are not in the same voicechannel as the bot");
+    var notISVE = new discord.MessageEmbed()
+        .setDescription(`❌ You need to be in the same voice channel as the bot`)
+        .setColor(message.guild.me.displayHexColor);
+    var notISV = false;
+    if (message.guild.me.voice.channel) {
+        if (message.member.voice.channel !== message.guild.me.voice.channel) notISV = true;
+    }
+    if (notISV === true) return message.channel.send(notISVE);
 
     var resumeEmbed = new discord.MessageEmbed()
-    .setColor(message.guild.me.displayHexColor)
-    .setDescription(`Resume playing`);
+        .setColor(message.guild.me.displayHexColor)
+        .setDescription(`Resume playing`);
 
     message.channel.send(resumeEmbed);
 
