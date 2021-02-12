@@ -6,18 +6,17 @@ module.exports.run = async (bot, message, args) => {
 
     var serverIcon = message.guild.iconURL();
     var botEmbed = new discord.MessageEmbed()
-        .setTitle("Serverinfo")
-        .setColor("#eba434")
+        .setColor(message.guild.me.displayHexColor)
         .setThumbnail(serverIcon)
-        .setFooter("Search ID https://discord.id/")
-        .addFields(
-            { name: "Server", value: message.guild.name },
-            { name: "Created", value: message.guild.createdAt },
-            { name: "Owner (ID)", value: message.guild.ownerID },
-            { name: "Members", value: message.guild.memberCount },
-            { name: "Joined", value: message.guild.joinedAt },
-            { name: "Region", value: message.guild.region }
-        );
+        .setTimestamp()
+        .setFooter(`@${message.guild.me.user.username}`)
+        .addField("Server", message.guild.name)
+        .addField("Owner", message.guild.owner.user.tag)
+        .addField("Joined", message.guild.joinedAt)
+        .addField("Players", message.guild.members.cache.filter(p => !p.user.bot).size)
+        .addField("Bots", message.guild.members.cache.filter(p => p.user.bot).size)
+        .addField("Region", message.guild.region);
+
     return message.channel.send(botEmbed);
 
 }
