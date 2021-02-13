@@ -229,5 +229,6 @@ function Finish(client, ops, dispatcher, message) {
 
 
 module.exports.help = {
-    name: `${prefix}play`
+    name: `${prefix}play`,
+    aliases: [`${prefix}p`]
 }

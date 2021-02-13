@@ -113,5 +113,6 @@ module.exports.run = async (bot, message, args, ops) => {
 
 
 module.exports.help = {
-    name: `${prefix}queue`
+    name: `${prefix}queue`,
+    aliases: [`${prefix}q`]
 }

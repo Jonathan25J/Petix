@@ -28,7 +28,8 @@ module.exports.run = async (bot, message, args) => {
 
 
 module.exports.help = {
-    name: `${prefix}serverinfo`
+    name: `${prefix}serverinfo`,
+    aliases: [`${prefix}si`]
 }
 
 

@@ -52,5 +52,6 @@ module.exports.run = async (client, message, args, ops) => {
 
 
 module.exports.help = {
-    name: `${prefix}playerinfo`
+    name: `${prefix}playerinfo`,
+    aliases: [`${prefix}pi`]
 }

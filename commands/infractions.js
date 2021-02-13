@@ -59,7 +59,8 @@ module.exports.run = async (bot, message, args, client) => {
 
 
 module.exports.help = {
-    name: `${prefix}infractions`
+    name: `${prefix}infractions`,
+    aliases: [`${prefix}if`]
 }
 
 

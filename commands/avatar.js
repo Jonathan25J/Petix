@@ -43,7 +43,8 @@ module.exports.run = async (bot, message, args, client) => {
 
 
 module.exports.help = {
-    name: `${prefix}avatar`
+    name: `${prefix}avatar`,
+    aliases: [`${prefix}av`]
 }
 
 

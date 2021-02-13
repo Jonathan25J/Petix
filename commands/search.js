@@ -36,5 +36,6 @@ module.exports.run = async (bot, message, args, ops) => {
 
 
 module.exports.help = {
-    name: `${prefix}search`
+    name: `${prefix}search`,
+    aliases: [`${prefix}s`]
 }
