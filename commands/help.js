@@ -12,10 +12,9 @@ module.exports.run = async (bot, message, args) => {
 
     var botEmbed = new discord.MessageEmbed()
         .setTitle("Petix help menu")
-        .setColor("#34a8eb")
-      //  .addField("Commands:", "```.serverinfo\n.kick (player) (reason)\n.ban (player) (reason)\n.avatar (player)\n.clear (message amount)\n.warn (player)\n.infractions (player) (set) (amount)\n.emb (title/message/channel/#color)\n.config```")
+        .setColor(message.guild.me.displayHexColor)
         .addFields(
-            { name: "General", value: "```.serverinfo\n.kick (player) (reason)\n.ban (player) (reason)\n.avatar (player)\n.clear (message amount)\n.warn (player)\n.infractions (player) (set) (amount)\n.emb (title/message/channel/#color)\n.config```\n \n \n "},
+            { name: "General", value: "```.serverinfo\n.kick (player) (reason)\n.ban (player) (reason)\n.avatar (player)\n.clear (message amount)\n.warn (player)\n.infractions (player) (set) (amount)\n.emb (title/message/channel/#color)\n.playerinfo (player)\n.lockdown\n.config```\n \n \n "},
             { name: "Music", value: "```.serverinfo\n.play (url)\n.search (title)\n.playlist (playlist url)\n.loop (true/false)\n.queue (clear/loop)\n.shuffle\n.pause\n.resume\n.skip\n.join\n.leave```"},
             { name: "Config", value: "```.config welcome (set/remove) (channel/message) (message) \n.config tickets (set/remove) category```"},
         )
