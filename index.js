@@ -11,7 +11,7 @@ const client = new discord.Client();
 // command handler
 client.commands = new discord.Collection();
 
-client.login(config.token);
+client.login(process.env.token);
 
 // command handler
 fs.readdir("./commands", (err, files) => {
