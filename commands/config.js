@@ -4,6 +4,12 @@ const fs = require("fs");
 const channelC = JSON.parse(fs.readFileSync("./database/channels.json", "utf8"));
 
 module.exports.run = async (bot, message, args, client) => {
+    const fs = require("fs");
+    const prefixes = JSON.parse(fs.readFileSync("./database/prefixes.json", "utf8"));
+    const guild = message.guild.id
+    var prefix;
+    if (!prefixes[guild]) prefix = `.`
+    if (prefixes[guild]) prefix = prefixes[guild].prefix;
 
     if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("You can't use this command");
 
@@ -11,7 +17,7 @@ module.exports.run = async (bot, message, args, client) => {
         var confEmbed = new discord.MessageEmbed()
             .setTitle("Config commands")
             .setColor("#34a8eb")
-            .addField("Options:", "```.config welcome (set/remove) (channel/message) (message) \n.config tickets (set/remove) category```")
+            .addField("Options:", "```" + `\n${prefix}config welcome (set/remove) (channel/message) (message) \n${prefix}config tickets (set/remove) category` + "```")
             .setThumbnail("https://cdn.icon-icons.com/icons2/1141/PNG/512/1486395874-settings_80622.png");
 
         return message.channel.send(confEmbed);
