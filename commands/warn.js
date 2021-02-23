@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 const fs = require("fs");
 const warns = JSON.parse(fs.readFileSync("./database/warns.json", "utf8"));
 
@@ -55,7 +54,7 @@ module.exports.run = async (bot, message, args) => {
 
 
 module.exports.help = {
-  name: `${prefix}warn`
+  name: `warn`
 }
 
 

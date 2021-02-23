@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 const fs = require("fs");
 const channelC = JSON.parse(fs.readFileSync("./database/channels.json", "utf8"));
 const client = new discord.Client();
@@ -93,5 +92,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: `${prefix}ticket`
+    name: `ticket`
 }

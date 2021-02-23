@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 const moment = require("moment");
 
 module.exports.run = async (client, message, args, ops) => {
@@ -52,6 +51,6 @@ module.exports.run = async (client, message, args, ops) => {
 
 
 module.exports.help = {
-    name: `${prefix}playerinfo`,
-    aliases: [`${prefix}pi`]
+    name: `playerinfo`,
+    aliases: [`pi`]
 }

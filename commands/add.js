@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 
 module.exports.run = async (bot, message, args, client) => {
 
@@ -37,7 +36,7 @@ module.exports.run = async (bot, message, args, client) => {
 }
 
 module.exports.help = {
-    name: `${prefix}add`,
+    name: `add`,
     aliases: []
 }
 

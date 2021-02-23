@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 const search = require('yt-search');
 
 module.exports.run = async (bot, message, args, ops) => {
@@ -13,6 +12,8 @@ module.exports.run = async (bot, message, args, ops) => {
         if (message.member.voice.channel !== message.guild.me.voice.channel) notISV = true;
     }
     if (notISV === true) return message.channel.send(notISVE);
+
+    if (!args[0]) return message.channel.send("You didn't gave a titel")
 
     search(args.join(' '), function (err, res) {
 
@@ -36,6 +37,6 @@ module.exports.run = async (bot, message, args, ops) => {
 
 
 module.exports.help = {
-    name: `${prefix}search`,
-    aliases: [`${prefix}s`]
+    name: `search`,
+    aliases: [`s`]
 }

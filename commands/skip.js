@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 
 module.exports.run = async (bot, message, args, ops) => {
 
@@ -44,5 +43,5 @@ module.exports.run = async (bot, message, args, ops) => {
 
 
 module.exports.help = {
-    name: `${prefix}skip`
+    name: `skip`
 }

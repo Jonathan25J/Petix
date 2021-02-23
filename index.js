@@ -56,16 +56,25 @@ client.on("message", async message => {
 
   if (message.channel.type == "dm") return;
 
-  var prefix = config.prefix;
+  const prefixes = JSON.parse(fs.readFileSync("./database/prefixes.json", "utf8"));
+  const guild = message.guild.id
+
+  var prefix;
+
+  if (prefixes[guild]) prefix = prefixes[guild].prefix;
+
+  if (!prefixes[guild]) prefix = config.prefix;
 
   var messageAray = message.content.split(" ");
 
   var command = messageAray[0];
 
+  if(!message.content.startsWith(prefix)) return;
+
   // command handler
   var arguments = messageAray.slice(1);
 
-  var commands = client.commands.get(command) || client.commands.get(client.aliases.get(command));
+  var commands = client.commands.get(command.slice(prefix.length)) || client.commands.get(client.aliases.get(command.slice(prefix.length)));
 
   var ops = {
     active: active

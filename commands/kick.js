@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 
 module.exports.run = async (bot, message, args) => {
 
@@ -45,5 +44,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-  name: `${prefix}kick`
+  name: `kick`
 }

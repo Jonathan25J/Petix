@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 const ytdl = require("ytdl-core");
 
 module.exports.run = async (bot, message, args, ops) => {
@@ -59,5 +58,5 @@ module.exports.run = async (bot, message, args, ops) => {
 
 
 module.exports.help = {
-    name: `${prefix}shuffle`
+    name: `shuffle`
 }

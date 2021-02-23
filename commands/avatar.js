@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 
 module.exports.run = async (bot, message, args, client) => {
     const mention = message.mentions.users.first();
@@ -43,8 +42,8 @@ module.exports.run = async (bot, message, args, client) => {
 
 
 module.exports.help = {
-    name: `${prefix}avatar`,
-    aliases: [`${prefix}av`]
+    name: `avatar`,
+    aliases: [`av`]
 }
 
 

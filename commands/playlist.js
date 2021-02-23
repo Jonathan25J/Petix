@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 const ytpl = require("ytpl");
 
 module.exports.run = async (bot, message, args, ops) => {
@@ -58,6 +57,6 @@ module.exports.run = async (bot, message, args, ops) => {
 
 
 module.exports.help = {
-    name: `${prefix}playlist`,
-    aliases: [`${prefix}pl`]
+    name: `playlist`,
+    aliases: [`pl`]
 }

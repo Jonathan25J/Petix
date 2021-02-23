@@ -1,14 +1,19 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 
 module.exports.run = async (bot, message, args) => {
+    const fs = require("fs");
+    const prefixes = JSON.parse(fs.readFileSync("./database/prefixes.json", "utf8"));
+    const guild = message.guild.id
+    var prefix;
+    if (!prefixes[guild]) prefix = `.`
+    if (prefixes[guild]) prefix = prefixes[guild].prefix;
 
     if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("You can't use this command");
 
     var seperator = "/";
 
-    if (args[0] == null) return message.channel.send(".emb (title/message/channel/#color)");
+    if (args[0] == null) return message.channel.send(`${prefix}emb (title/message/channel/#color)`);
 
     var argsEmb = args.join(" ").split(seperator);
 
@@ -45,6 +50,6 @@ module.exports.run = async (bot, message, args) => {
 
 
 module.exports.help = {
-    name: `${prefix}emb`
+    name: `emb`
 }
 

@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 const ytdl = require("ytdl-core");
 
 module.exports.run = async (client, message, args, ops, playlist) => {
@@ -229,6 +228,6 @@ function Finish(client, ops, dispatcher, message) {
 
 
 module.exports.help = {
-    name: `${prefix}play`,
-    aliases: [`${prefix}p`]
+    name: `play`,
+    aliases: [`p`]
 }
