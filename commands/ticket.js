@@ -7,6 +7,7 @@ const client = new discord.Client();
 module.exports.run = async (bot, message, args) => {
 
     const guildID = message.guild.id;
+    if (!channelC[guildID]) return;
     var categoryId = channelC[guildID].tickets.category;
     var userName = message.author.username;
     var userD = message.author.discriminator;
