@@ -85,8 +85,10 @@ module.exports.run = async (bot, message, args, client) => {
                 const category = message.channel.parentID;
                 const categoryName = message.channel.parent.name;
 
-                if (!channelC[guildID].tickets) channelC[guildID].tickets = {
-                };
+                if (!channelC[guildID]) channelC[guildID] = {
+                    tickets: {
+                        category: category
+                }}
 
                 channelC[guildID].tickets.category = category;
                 message.channel.send(`Tickets are set in the "${categoryName}" category`);
