@@ -1,0 +1,7 @@
+services:
+  petix:
+    build:
+      context: .
+      dockerfile: bot.dockerfile
+    volumes:
+      - .:/bot
