@@ -1,5 +1,4 @@
 const discord = require("discord.js");
-const config = require("../config.json");
 const fs = require("fs");
 const prefixes = JSON.parse(
   fs.readFileSync("./database/prefixes.json", "utf8")

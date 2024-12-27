@@ -1,5 +1,4 @@
 const discord = require("discord.js");
-const config = require("../config.json");
 const fs = require("fs");
 const channelC = JSON.parse(
   fs.readFileSync("./database/channels.json", "utf8")
