@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
           "```",
       },
       {
-        name: "Music",
+        name: "Music (deprecated)",
         value:
           "```" +
           `\n${prefix}play (url)\n${prefix}search (title)\n${prefix}playlist (playlist url)\n${prefix}loop (true/false)\n${prefix}queue (clear/loop)\n${prefix}shuffle\n${prefix}pause\n${prefix}resume\n${prefix}skip\n${prefix}join\n${prefix}leave\n` +
