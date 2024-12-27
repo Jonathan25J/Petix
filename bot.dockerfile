@@ -2,8 +2,10 @@ FROM node:23.5
 
 WORKDIR /bot
 
-COPY . .
+COPY package*.json ./
 
 RUN npm install
 
-CMD [ "node", "index.js"]
+COPY . .
+
+CMD ["node", "index.js"]

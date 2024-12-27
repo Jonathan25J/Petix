@@ -5,3 +5,4 @@ services:
       dockerfile: bot.dockerfile
     volumes:
       - .:/bot
+      - /bot/node_modules
