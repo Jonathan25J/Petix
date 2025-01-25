@@ -18,7 +18,7 @@ module.exports = {
                 .addFields(
                     { name: 'Total members', value: guild.memberCount.toString(), inline: true },
                     { name: 'Apps', value: (guild.members.cache.filter((m) => m.user.bot).size + 1).toString(), inline: true },
-                    { name: 'Players', value: guild.members.cache.filter((m) => !m.user.bot).size.toString(), inline: true },
+                    { name: 'Users', value: guild.members.cache.filter((m) => !m.user.bot).size.toString(), inline: true },
                     { name: 'Total roles', value: guild.roles.cache.size.toString(), inline: true},
                     { name: 'Total channels', value: guild.channels.cache.size.toString(), inline: true},
                     {
