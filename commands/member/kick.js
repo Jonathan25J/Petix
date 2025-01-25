@@ -5,7 +5,7 @@ module.exports = {
     data: new SlashCommandSubcommandBuilder()
         .setName('kick')
         .setDescription('Kick a member')
-        .addMentionableOption(option =>
+        .addUserOption(option =>
             option.setName('member')
                 .setDescription('Mention the name of the member you want to kick')
                 .setRequired(true))
@@ -15,19 +15,11 @@ module.exports = {
 
     async execute(interaction) {
 
-        if (!interaction.guild) {
-            return await interaction.reply({ content: 'This command can only be used in a server', flags: MessageFlags.Ephemeral });
-        }
-
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
-            return await interaction.reply({ content: 'You do not have permission to use this command', flags: MessageFlags.Ephemeral });
-        }
-
         if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.KickMembers)) {
             return await interaction.reply({ content: 'I do not have permission to kick members', flags: MessageFlags.Ephemeral });
         }
 
-        const givenMember = interaction.options.getMentionable('member');
+        const givenMember = interaction.options.getUser('member');
         let member = null;
 
         if (givenMember) {
