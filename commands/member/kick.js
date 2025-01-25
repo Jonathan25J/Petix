@@ -16,7 +16,7 @@ module.exports = {
     async execute(interaction) {
 
         if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.KickMembers)) {
-            return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'I do not have permission to kick members')], flags: MessageFlags.Ephemeral });
+            return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'I don\'t have the `KickMembers` permission')], flags: MessageFlags.Ephemeral });
         }
 
         const givenMember = interaction.options.getUser('member');

@@ -8,7 +8,7 @@ module.exports = {
         .setDescription('Server command')
         .addSubcommand(kickCommand.data)
         .addSubcommand(banCommand.data)
-        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers, PermissionFlagsBits.BanMembers)
         .setContexts(InteractionContextType.Guild),
 
 	async execute(interaction) {
