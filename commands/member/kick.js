@@ -1,11 +1,11 @@
 const { SlashCommandSubcommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags, PermissionsBitField } = require('discord.js');
-const { getUserFromMention, COLORS } = require('../../utils.js');
+const { COLORS } = require('../../utils.js');
 
 module.exports = {
     data: new SlashCommandSubcommandBuilder()
         .setName('kick')
         .setDescription('Kick a member')
-        .addStringOption(option =>
+        .addMentionableOption(option =>
             option.setName('member')
                 .setDescription('Mention the name of the member you want to kick')
                 .setRequired(true))
@@ -27,8 +27,13 @@ module.exports = {
             return await interaction.reply({ content: 'I do not have permission to kick members', flags: MessageFlags.Ephemeral });
         }
 
-        const givenMember = interaction.options.getString('member');
-        const member = interaction.guild.members.cache.get(getUserFromMention(interaction, givenMember).id);
+        const givenMember = interaction.options.getMentionable('member');
+        let member = null;
+
+        if (givenMember) {
+            member = interaction.guild.members.cache.get(givenMember.id);
+        }
+
         const reason = interaction.options.getString('reason') || 'No reason given';
 
         if (!member) {
@@ -93,3 +98,4 @@ function getConfirmAndCancelButton() {
     return new ActionRowBuilder()
         .addComponents(cancel, confirm);
 }
+
