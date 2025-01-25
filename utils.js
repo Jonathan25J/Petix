@@ -1,9 +1,13 @@
 const {EmbedBuilder} = require('discord.js');
 
 function createEmbedMessage(guild, message) {
+    let color = COLORS.DEFAULT;
+
+    if (guild) color = guild.members.me.displayHexColor;
+    
     const embed = new EmbedBuilder()
     .setDescription(message)
-    .setColor(guild.members.me.displayHexColor)
+    .setColor(color)
     return embed;
 }
 
@@ -13,6 +17,7 @@ const COLORS = {
     GREEN: "#00FF00",
     GRAY: "#4e5058",
     ORANGE: "#facb3e",
+    DEFAULT: '#43c2f1'
 };
 
 module.exports = {

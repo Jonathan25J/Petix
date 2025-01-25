@@ -1,5 +1,5 @@
 const { SlashCommandSubcommandBuilder, PermissionsBitField, MessageFlags, ChannelType } = require('discord.js');
-const { COLORS, createEmbedMessage } = require('../../utils.js');
+const { createEmbedMessage } = require('../../utils.js');
 
 module.exports = {
     data: new SlashCommandSubcommandBuilder()
