@@ -7,10 +7,6 @@ module.exports = {
 
     async execute(interaction) {
 
-        if (!interaction.guild) {
-            return await interaction.reply({ content: 'This command can only be used in a server', flags: MessageFlags.Ephemeral });
-        }
-
         if (interaction.guild.available) {
             const guild = interaction.guild;
             const embed = new EmbedBuilder()
@@ -40,7 +36,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
         } else {
-            await interaction.reply({ content: 'Server is not available', flags: MessageFlags.Ephemeral });
+            await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'Server is not available')], flags: MessageFlags.Ephemeral });
         }
 
     },

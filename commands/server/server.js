@@ -1,11 +1,12 @@
-const { SlashCommandBuilder, MessageFlags } = require('discord.js');
+const { SlashCommandBuilder, InteractionContextType, MessageFlags } = require('discord.js');
 const infoCommand = require('./info');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('server')
         .setDescription('Server command')
-        .addSubcommand(infoCommand.data),
+        .addSubcommand(infoCommand.data)
+        .setContexts(InteractionContextType.Guild),
 
 	async execute(interaction) {
 		const subcommand = interaction.options.getSubcommand();

@@ -1,5 +1,5 @@
 const { SlashCommandSubcommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags, PermissionsBitField } = require('discord.js');
-const { COLORS } = require('../../utils.js');
+const { COLORS, createEmbedMessage } = require('../../utils.js');
 
 module.exports = {
     data: new SlashCommandSubcommandBuilder()
@@ -16,7 +16,7 @@ module.exports = {
     async execute(interaction) {
 
         if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.KickMembers)) {
-            return await interaction.reply({ content: 'I do not have permission to kick members', flags: MessageFlags.Ephemeral });
+            return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'I do not have permission to kick members')], flags: MessageFlags.Ephemeral });
         }
 
         const givenMember = interaction.options.getUser('member');
@@ -29,11 +29,11 @@ module.exports = {
         const reason = interaction.options.getString('reason') || 'No reason given';
 
         if (!member) {
-            return await interaction.reply({ content: 'Member not found', flags: MessageFlags.Ephemeral });
+            return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'Member not found')], flags: MessageFlags.Ephemeral });
         }
 
         if (!member.kickable) {
-            return await interaction.reply({ content: 'I cannot kick this member', flags: MessageFlags.Ephemeral });
+            return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'I cannot kick this member')], flags: MessageFlags.Ephemeral });
         }
 
         const embedRequestKick = new EmbedBuilder()

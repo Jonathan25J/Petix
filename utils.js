@@ -1,3 +1,12 @@
+const {EmbedBuilder} = require('discord.js');
+
+function createEmbedMessage(guild, message) {
+    const embed = new EmbedBuilder()
+    .setDescription(message)
+    .setColor(guild.members.me.displayHexColor)
+    return embed;
+}
+
 const COLORS = {
     RED: "#ff4833",
     BLUE: "#0000FF",
@@ -6,5 +15,5 @@ const COLORS = {
 };
 
 module.exports = {
-    COLORS
+    createEmbedMessage, COLORS
 };
