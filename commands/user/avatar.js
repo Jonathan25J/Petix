@@ -1,4 +1,5 @@
 const { SlashCommandSubcommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
+const { COLORS } = require('../../utils.js');
 
 module.exports = {
     data: new SlashCommandSubcommandBuilder()
@@ -10,13 +11,13 @@ module.exports = {
                 .setRequired(true)),
 
     async execute(interaction) {
-        const user = interaction.options.getUser('user');
-        const member = await interaction.guild.members.fetch( { user: user.id, force: true}); // Force fetch the user
+        const userId = interaction.options.getUser('user').id;
+        const user = await interaction.client.users.fetch(userId, { force: true });
 
         const embed = new EmbedBuilder()
-            .setTitle(`🔎 ${member.user.username}'s avatar`)
-            .setImage(member.user.displayAvatarURL({ dynamic: true, extension: 'jpg', size: 1024 }))
-            .setColor(member.user.hexAccentColor || interaction.guild.members.me.displayHexColor)
+            .setTitle(`🔎 ${user.username}'s avatar`)
+            .setImage(user.displayAvatarURL({ dynamic: true, extension: 'jpg', size: 1024 }))
+            .setColor(user.hexAccentColor || COLORS.DEFAULT)
             .setTimestamp();
 
         await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
