@@ -12,6 +12,7 @@ const COLORS = {
     BLUE: "#0000FF",
     GREEN: "#00FF00",
     GRAY: "#4e5058",
+    ORANGE: "#facb3e",
 };
 
 module.exports = {

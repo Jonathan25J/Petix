@@ -3,20 +3,20 @@ const { COLORS, createEmbedMessage } = require('../../utils.js');
 
 module.exports = {
     data: new SlashCommandSubcommandBuilder()
-        .setName('kick')
-        .setDescription('Kick a member')
+        .setName('ban')
+        .setDescription('Ban a member')
         .addUserOption(option =>
             option.setName('member')
-                .setDescription('Mention the name of the member you want to kick')
+                .setDescription('The member you want to ban')
                 .setRequired(true))
         .addStringOption(option =>
             option.setName('reason')
-                .setDescription('The reason for kicking the member')),
+                .setDescription('The reason for banning the member')),
 
     async execute(interaction) {
 
-        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.KickMembers)) {
-            return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'I do not have permission to kick members')], flags: MessageFlags.Ephemeral });
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.BanMembers)) {
+            return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'I do not have permission to ban members')], flags: MessageFlags.Ephemeral });
         }
 
         const givenMember = interaction.options.getUser('member');
@@ -32,19 +32,19 @@ module.exports = {
             return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'Member not found')], flags: MessageFlags.Ephemeral });
         }
 
-        if (!member.kickable) {
-            return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'I cannot kick this member')], flags: MessageFlags.Ephemeral });
+        if (!member.bannable) {
+            return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'I cannot ban this member')], flags: MessageFlags.Ephemeral });
         }
 
-        const embedRequestKick = new EmbedBuilder()
-            .setTitle('Kick Member')
-            .setDescription(`Are you sure you want to kick ${member}?`)
+        const embedRequestBan = new EmbedBuilder()
+            .setTitle('Ban Member')
+            .setDescription(`Are you sure you want to ban ${member}?`)
             .setThumbnail(member.displayAvatarURL({ dynamic: true }))
             .addFields({ name: 'Reason', value: reason })
-            .setColor(COLORS.ORANGE)
+            .setColor(COLORS.RED)
             .setTimestamp();
 
-        const response = await interaction.reply({ embeds: [embedRequestKick], components: [getConfirmAndCancelButton()], flags: MessageFlags.Ephemeral, withResponse: true });
+        const response = await interaction.reply({ embeds: [embedRequestBan], components: [getConfirmAndCancelButton()], flags: MessageFlags.Ephemeral, withResponse: true });
 
         const collectorFilter = i => i.user.id === interaction.user.id;
 
@@ -52,19 +52,19 @@ module.exports = {
             const confirmation = await response.resource.message.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
 
             const responseEmbed = new EmbedBuilder()
-                .setTitle('Kick Member')
+                .setTitle('Ban Member')
                 .setThumbnail(member.displayAvatarURL({ dynamic: true }))
-                .setColor(COLORS.ORANGE)
+                .setColor(COLORS.RED)
                 .setTimestamp();
 
-            // Kick the member if the user confirms the kick and change the embed accordingly
+            // Ban the member if the user confirms the ban and change the embed accordingly
             if (confirmation.customId === 'confirm') {
 
-                await member.kick({ reason: reason });
+                await member.ban({ reason: reason });
 
-                responseEmbed.setDescription(`${member} has been kicked`);
+                responseEmbed.setDescription(`${member} has been banned`);
             } else {
-                responseEmbed.setDescription(`${member} has not been kicked`);
+                responseEmbed.setDescription(`${member} has not been banned`);
                 responseEmbed.setColor(COLORS.GRAY);
             }
             await interaction.editReply({ embeds: [responseEmbed], components: [] });
@@ -79,7 +79,7 @@ module.exports = {
 function getConfirmAndCancelButton() {
     const confirm = new ButtonBuilder()
         .setCustomId('confirm')
-        .setLabel('Confirm kick')
+        .setLabel('Confirm ban')
         .setStyle(ButtonStyle.Danger);
 
     const cancel = new ButtonBuilder()
