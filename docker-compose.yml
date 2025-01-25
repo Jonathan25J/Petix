@@ -1,0 +1,8 @@
+services:
+  petix:
+    build:
+      context: .
+      dockerfile: app.dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
