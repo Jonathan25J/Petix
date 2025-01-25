@@ -16,8 +16,8 @@ jobs:
 
       - name: Create .env file with secrets
         run: |
-          echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" >> .env
-          echo "BOT_CLIENT_ID=${{ secrets.BOT_CLIENT_ID }}" >> .env
+          echo "APP_TOKEN=${{ secrets.APP_TOKEN }}" >> .env
+          echo "APP_CLIENT_ID=${{ secrets.APP_CLIENT_ID }}" >> .env
 
       - name: Run docker-compose
         uses: hoverkraft-tech/compose-action@v2.0.1

@@ -28,14 +28,14 @@ for (const folder of commandFolders) {
 	}
 }
 
-const rest = new REST().setToken(process.env.BOT_TOKEN);
+const rest = new REST().setToken(process.env.APP_TOKEN);
 
 (async () => {
 	try {
 		logger.info(`Started refreshing ${commands.length} application (/) commands.`);
 
 		const data = await rest.put(
-			Routes.applicationCommands(process.env.BOT_CLIENT_ID),
+			Routes.applicationCommands(process.env.APP_CLIENT_ID),
 			{ body: commands },
 		);
 

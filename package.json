@@ -1,7 +1,7 @@
 {
   "name": "petix",
   "version": "1.0.0",
-  "description": "Discord bot",
+  "description": "Discord app",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

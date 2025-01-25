@@ -2,7 +2,7 @@ services:
   petix:
     build:
       context: .
-      dockerfile: bot.dockerfile
+      dockerfile: app.dockerfile
     volumes:
-      - .:/bot
-      - /bot/node_modules
+      - .:/app
+      - /app/node_modules
