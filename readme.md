@@ -12,7 +12,7 @@ The Petix bot is largely rebuild in version 2.0.0 so that the bot still can be h
 It's not possible to invite this app.
 
 ## Hosting
-- Have the following software installed: `Node`, `JavaScript` and the `Docker Engine`
+- Have the following software installed: `Node` and the `Docker Engine`
 - Create a `.env` file in the root folder with the following content 
 ```bash
 # App
