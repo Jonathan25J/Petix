@@ -28,7 +28,7 @@ module.exports = {
         if (!channel.members.find((u) => u.id == user.id)) return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, `${user.toString()} is not in ${channel.toString()}`)], flags: MessageFlags.Ephemeral });
 
         try {
-            await channel.permissionOverwrites.delete(user.id)
+            await channel.permissionOverwrites.edit(user.id, { ViewChannel: false, SendMessages: false });
             await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, `${user.toString()} has been removed from ${channel.toString()}`)] });
         } catch (error) {
             return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'Failed to edit role permissions. Please check the role hierarchy')], flags: MessageFlags.Ephemeral });
