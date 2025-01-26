@@ -1,5 +1,19 @@
 const {EmbedBuilder} = require('discord.js');
 
+const DEFAULT = {
+    LANGUAGE: "en-US",
+    COLOR: "#43c2f1"
+};
+
+const COLORS = {
+    RED: "#ff4833",
+    BLUE: "#0000FF",
+    GREEN: "#00FF00",
+    GRAY: "#4e5058",
+    ORANGE: "#facb3e",
+    DEFAULT : DEFAULT.COLOR
+};
+
 function createEmbedMessage(guild, message) {
     let color = COLORS.DEFAULT;
 
@@ -11,15 +25,6 @@ function createEmbedMessage(guild, message) {
     return embed;
 }
 
-const COLORS = {
-    RED: "#ff4833",
-    BLUE: "#0000FF",
-    GREEN: "#00FF00",
-    GRAY: "#4e5058",
-    ORANGE: "#facb3e",
-    DEFAULT: '#43c2f1'
-};
-
 module.exports = {
-    createEmbedMessage, COLORS
+    createEmbedMessage, COLORS, DEFAULT
 };
