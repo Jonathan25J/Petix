@@ -29,7 +29,7 @@ module.exports = {
         interaction.channel.bulkDelete(amount).then(async () =>
             await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, `You deleted ${amount} message(s)`)], flags: MessageFlags.Ephemeral })
         ).catch(async () =>
-            await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'Something went wrong')], flags: MessageFlags.Ephemeral })
+            await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'The bot can\'t delete the messages, Please check the role hierarchy')], flags: MessageFlags.Ephemeral })
         )
 
     },
