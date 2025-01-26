@@ -3,6 +3,7 @@ const { createEmbedMessage } = require('../../utils.js');
 const clearCommand = require('./clear');
 const lockdownCommand = require('./lockdown.js');
 const addMemberCommand = require('./member/add.js');
+const removeMemberCommand = require('./member/remove.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -13,7 +14,8 @@ module.exports = {
         .addSubcommandGroup(group =>
             group.setName('member')
                 .setDescription('Channel member related commands')
-                .addSubcommand(addMemberCommand.data))
+                .addSubcommand(addMemberCommand.data)
+                .addSubcommand(removeMemberCommand.data))
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageRoles, PermissionFlagsBits.ManageMessages)
         .setContexts(InteractionContextType.Guild),
 
@@ -36,6 +38,8 @@ module.exports = {
                 switch (subcommand) {
                     case 'add':
                         return await addMemberCommand.execute(interaction);
+                    case 'remove':
+                        return await removeMemberCommand.execute(interaction);
                     default:
                         return await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'Unknown subcommand')], flags: MessageFlags.Ephemeral });
                 }
