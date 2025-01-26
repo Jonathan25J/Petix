@@ -6,7 +6,7 @@
 [![Build](https://github.com/Jonathan25J/Petix/actions/workflows/docker-compose.yml/badge.svg)](https://github.com/Jonathan25J/Petix/actions/workflows/docker-compose.yml)
 ![!JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000&)
 
-The Petix bot is largely rebuild in version 2.0.0 so that the bot still can be hosted without crashing each time. You can see the old and current functionality of this bot in the provided images.
+The Petix bot/app is largely rebuild in version 2.0.0 so that the app still can be hosted without crashing each time. You can see the old and current functionality of this app in the provided images.
 
 ## Invite app
 It's not possible to invite this app.
