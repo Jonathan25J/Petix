@@ -5,7 +5,7 @@ const embedCommand = require('./embed.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('misc')
-        .setDescription('Embed command')
+        .setDescription('Misc command')
         .addSubcommand(embedCommand.data),
 
 	async execute(interaction) {
