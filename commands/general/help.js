@@ -6,63 +6,14 @@ module.exports = {
         .setDescription('Help command'),
 
     async execute(interaction) {
-        const commands = await interaction.client.application.commands.fetch();
-        const subcommands = [];
-
-        commands.forEach(cmd => {
-            if (cmd.options) {
-                cmd.options.forEach(option => {
-                    // Handle subcommand groups
-                    if (option.type === 2) {
-                        const subCommandGroup = option;
-
-                        if (subCommandGroup.options) {
-                            subCommandGroup.options.forEach(subCmd => {
-                                if (subCmd.type === 1) { 
-                                    subcommands.push({
-                                        name: cmd.name,
-                                        id: cmd.id,
-                                        groupName: subCommandGroup.name,
-                                        subName: subCmd.name,
-                                        subDescription: subCmd.description || 'No description available.',
-                                        subOptions: subCmd.options
-                                            ? subCmd.options.map(opt => ({
-                                                name: opt.name,
-                                                required: opt.required || false
-                                            }))
-                                            : []
-                                    });
-                                }
-                            });
-                        }
-                    }
-
-                    // Handle standalone subcommands
-                    if (option.type === 1) {
-                        const subCommand = option;
-                        subcommands.push({
-                            name: cmd.name,
-                            id: cmd.id,
-                            subName: subCommand.name,
-                            subDescription: subCommand.description || 'No description available.',
-                            subOptions: subCommand.options
-                                ? subCommand.options.map(opt => ({
-                                    name: opt.name,
-                                    required: opt.required || false
-                                }))
-                                : []
-                        });
-                    }
-                });
-            }
-        });
-
-        const subcommandDescriptions = subcommands.map(cmd =>
-            `</${cmd.name} ${cmd.groupName ? cmd.groupName + ' ' : ''}${cmd.subName}:${cmd.id}> ` +
-            cmd.subOptions
+        const subcommands = await retrieveSubcommands(interaction);
+        
+        const subcommandDescriptions = subcommands.map(subcommand =>
+            `</${subcommand.rootName} ${subcommand.groupName ? subcommand.groupName + ' ' : ''}${subcommand.name}:${subcommand.id}> ` +
+            subcommand.options
                 .map(option => option.required ? `\`[${option.name}]\`` : `\`(${option.name})\``)
                 .join(' ') +
-            `\n${cmd.subDescription}`
+            `\n${subcommand.description}`
         );
 
         const embed = new EmbedBuilder()
@@ -74,3 +25,59 @@ module.exports = {
         await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
     },
 };
+
+async function retrieveSubcommands(interaction) {
+    const commands = await interaction.client.application.commands.fetch();
+    const subcommands = [];
+
+    commands.forEach(command => {
+        if (command.options) {
+            command.options.forEach(option => {
+                // Handle subcommand groups
+                if (option.type === 2) {
+                    const subcommandGroup = option;
+
+                    if (subcommandGroup.options) {
+                        subcommandGroup.options.forEach(option => {
+                            if (option.type === 1) { 
+                                const subcommand = option;
+                                subcommands.push({
+                                    name: subcommand.name,
+                                    description: subcommand.description || 'No description available.',
+                                    options: subcommand.options
+                                        ? subcommand.options.map(option => ({
+                                            name: option.name,
+                                            required: option.required || false
+                                        }))
+                                        : [],
+                                    rootName: command.name,
+                                    id: command.id,
+                                    groupName: subcommandGroup.name
+                                });
+                            }
+                        });
+                    }
+                }
+
+                // Handle standalone subcommands
+                if (option.type === 1) {
+                    const subcommand = option;
+                    subcommands.push({
+                        name: subcommand.name,
+                        description: subcommand.description || 'No description available.',
+                        options: subcommand.options
+                            ? subcommand.options.map(option => ({
+                                name: option.name,
+                                required: option.required || false
+                            }))
+                            : [],
+                        rootName: command.name,
+                        id: command.id
+                    });
+                }
+            });
+        }
+    });
+
+    return subcommands;
+}
