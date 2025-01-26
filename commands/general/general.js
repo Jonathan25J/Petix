@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, InteractionContextType, MessageFlags } = require('discord.js');
+const { createEmbedMessage } = require('../../utils.js');
 const memberInfoCommand = require('./member/info');
 
 module.exports = {
@@ -22,12 +23,12 @@ module.exports = {
                         await memberInfoCommand.execute(interaction);
                         break;
                     default:
-                        await interaction.reply({ content: 'Unknown subcommand', flags: MessageFlags.Ephemeral });
+                        await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'Unknown subcommand')], flags: MessageFlags.Ephemeral });
                         break;
                 }
                 break;
             default:
-                await interaction.reply({ content: 'Unknown subcommand group', flags: MessageFlags.Ephemeral });
+                await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'Unknown subcommand group')], flags: MessageFlags.Ephemeral });
                 break;
         }
     },

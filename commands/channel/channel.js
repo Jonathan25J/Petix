@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, InteractionContextType, MessageFlags } = require('discord.js');
+const { createEmbedMessage } = require('../../utils.js');
 const clearCommand = require('./clear');
 
 module.exports = {
@@ -17,7 +18,7 @@ module.exports = {
                 await clearCommand.execute(interaction);
                 break;
             default:
-                await interaction.reply({ content: 'Unknown subcommand', flags: MessageFlags.Ephemeral });
+                await interaction.reply({ embeds: [createEmbedMessage(interaction.guild, 'Unknown subcommand')], flags: MessageFlags.Ephemeral });
                 break;
         }
     },
