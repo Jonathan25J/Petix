@@ -8,6 +8,8 @@ module.exports = {
     async execute(interaction) {
         const subcommands = await retrieveSubcommands(interaction);
 
+        subcommands.sort((a, b) => a.rootName.localeCompare(b.rootName));
+
         const subcommandDescriptions = subcommands.map(subcommand =>
             `</${subcommand.rootName} ${subcommand.groupName ? subcommand.groupName + ' ' : ''}${subcommand.name}:${subcommand.id}> ` +
             subcommand.options
